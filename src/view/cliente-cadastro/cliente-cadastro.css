@@ -1,0 +1,9 @@
+.btn-cadastro{
+    background-color: steelblue;
+    color: #ffff;
+}
+
+.btn-cadastro:hover{
+    background-color: black;
+    color: #ffff;
+}

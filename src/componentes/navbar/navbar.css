@@ -1,0 +1,12 @@
+.navbar{
+    background-color: dimgray;
+}
+
+.nav-item a{
+    color: #ffff;
+    transition: .3s ease-in;
+}
+
+.nav-item a:hover{
+    color: steelblue;
+}
