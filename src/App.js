@@ -10,7 +10,7 @@ import Home from './view/home';
 import UsuarioRecuperarSenha from './view/usuario-recuperarsenha';
 import ClienteCadastro from './view/cliente-cadastro';
 
-function App() {
+function App()  {
   return (
     <Provider store={store}>
       <Router>
