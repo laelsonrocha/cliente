@@ -9,6 +9,7 @@ import NovoUsuario from './view/usuario-novo';
 import Home from './view/home';
 import UsuarioRecuperarSenha from './view/usuario-recuperarsenha';
 import ClienteCadastro from './view/cliente-cadastro';
+import MeusClientes from './view/meus-clientes';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route exact path='/usuariorecuperarsenha' component={UsuarioRecuperarSenha} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/clientecadastro' component={ClienteCadastro} />
+        <Route exact path='/meusclientes' component={MeusClientes} />
       </Router>
     </Provider>
   );
