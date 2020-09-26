@@ -11,7 +11,7 @@ import UsuarioRecuperarSenha from './view/usuario-recuperarsenha';
 import ClienteCadastro from './view/cliente-cadastro';
 import MeusClientes from './view/meus-clientes';
 
-function App() {
+function App()  {
   return (
     <Provider store={store}>
       <Router>
