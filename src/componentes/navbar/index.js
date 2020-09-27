@@ -22,8 +22,8 @@ function Navbar(){
 
                                 useSelector(state => state.usuarioLogado) > 0 ?
                             <>
-                                <li className="nav-item"><Link className="nav-link" to="clientecadastro">Cadastar Clientes</Link></li>
-                                <li className="nav-item"><Link className="nav-link" to="meusclientes">Meus Clientes</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="/clientecadastro">Cadastar Clientes</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="/clientes/meus">Meus Clientes</Link></li>
                                 <li className="nav-item"><Link className="nav-link" onClick={() => dispatch({type: 'LOG_OUT'})  }>Sair </Link></li>
 
                             </>
