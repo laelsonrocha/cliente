@@ -18,6 +18,8 @@ function ClienteCadastro(props){
     const [foto, setFoto] = useState();
     const [observacao, setObservacao] = useState();
     const usuarioEmail = useSelector(state => state.usuarioEmail);
+    const [fotoAtual, setFotoAtual] = useState();    
+    const [fotoNova, setFotoNova] = useState(); 
 
     const storage = firebase.storage();   
     const db = firebase.firestore();
@@ -25,13 +27,14 @@ function ClienteCadastro(props){
     useEffect(() => {  
         if(props.match.params.id){                   
             firebase.firestore().collection('clientes').doc(props.match.params.id).get().then(resultado => {
-                setNome(resultado.data().nome)       
+                setNome(resultado.data().nome)   
                 setIdade(resultado.data().idade)
                 setEstadoCivil(resultado.data().estadocivil)       
                 setCpf(resultado.data().cpf)   
                 setObservacao(resultado.data().observacao)                                         
                 setCidade(resultado.data().cidade)                                         
-                setEstado(resultado.data().estado)                                                                                                
+                setEstado(resultado.data().estado)
+                setFotoAtual(resultado.data().foto)                                                                                                 
     })
 }
 },[carregando])
@@ -40,7 +43,7 @@ function ClienteCadastro(props){
         setMsgTipo(null);
         setCarregando(1);
     
-        storage.ref(`imagens/${foto.name}`).put(foto).then(() => {
+        storage.ref(`imagens/${fotoNova.name}`).put(fotoNova).then(() => {
             db.collection('clientes').add({
                 nome: nome,
                 idade: idade,
@@ -51,7 +54,7 @@ function ClienteCadastro(props){
                 observacao: observacao,
                 visualizações:0,
                 usuario:usuarioEmail,
-                foto: foto.name,
+                foto: fotoNova.name,
                 publico:1,
                 criacao: new Date()
             }).then(() => {
@@ -66,6 +69,31 @@ function ClienteCadastro(props){
     
     }
     
+    function atualizar(){
+        setMsgTipo(null);
+        setCarregando(1);
+    
+        if(fotoNova)    
+        storage.ref(`imagens/${fotoNova.name}`).put(fotoNova);
+        
+            db.collection('clientes').doc(props.match.params.id).update({
+                nome: nome,
+                idade: idade,
+                cpf: cpf,
+                estadocivil: estadocivil,
+                estado: estado,
+                cidade: cidade,
+                observacao: observacao,
+                foto: fotoNova ? fotoNova.name : fotoAtual            
+            }).then(() => {
+                setMsgTipo('sucesso');
+                setCarregando(0);
+            }).catch(erro => {
+                setMsgTipo('erro');
+                setCarregando(0);
+        });
+    }
+
 	return(
         <>
         <Navbar/>
@@ -78,22 +106,22 @@ function ClienteCadastro(props){
                     <div className="form-group">
                             <div className="col-12">
                                 <label>Nome:</label>
-                                <input onChange={(e) => setNome(e.target.value) }type="text" className="form-control" />
+                                <input onChange={(e) => setNome(e.target.value) }type="text" className="form-control" value={nome && nome} />
                             </div>
 
                             <div className="col-12">
                                 <label>CPF:</label>
-                                <input onChange={(e) => setCpf(e.target.value) } type="text" className="form-control" />
+                                <input onChange={(e) => setCpf(e.target.value) } type="text" className="form-control" value={cpf && cpf} />
                             </div>
 
                             <div className="col-12">
                                 <label>Idade:</label>
-                                <input onChange={(e) => setIdade(e.target.value) } type="text" className="form-control" />
+                                <input onChange={(e) => setIdade(e.target.value) } type="text" className="form-control" value={idade && idade} />
                             </div>
 
                             <div className="col-12">
                             <label>Estado Civil:</label>
-                            <select onChange={(e) => setEstadoCivil(e.target.value) } className="form-control">
+                            <select onChange={(e) => setEstadoCivil(e.target.value) } className="form-control" value={estadocivil && estadocivil} >
                                 <option disabled selected value> Selecione uma das opcoes </option>
                                 <option>Solteiro</option>
                                 <option>Casado</option>
@@ -104,18 +132,23 @@ function ClienteCadastro(props){
 
                             <div className="col-12">
                                 <label>Cidade:</label>
-                                <input onChange={(e) => setCidade(e.target.value) } type="text" className="form-control" />
+                                <input onChange={(e) => setCidade(e.target.value) } type="text" className="form-control"  value={cidade && cidade}/>
                             </div>
 
                             <div className="col-12">
                                 <label>Estado:</label>
-                                <input onChange={(e) => setEstado(e.target.value) } type="text" className="form-control" />
+                                <input onChange={(e) => setEstado(e.target.value) } type="text" className="form-control" value={estado && estado} />
+                            </div>
+
+                            <div className="col-12">
+                                <label>Observacao:</label>
+                                <input onChange={(e) => setObservacao(e.target.value) } type="text" className="form-control" value={observacao && observacao}/>
                             </div>
                         </div>
 
                         <div className="form-group">
-                            <label> Upload foto: </label>
-                            <input onChange={(e) => setFoto(e.target.files[0]) } type="file" className="form-control"/>
+                            <label>Upload da Foto {props.match.params.id  ? '(caso queira manter a mesma foto, não precisa escolher uma nova imagem!)' : null}:</label>
+                            <input onChange={(e) => setFotoNova(e.target.files[0]) } type="file" className="form-control"/>
                         </div>
 
                     </form>
@@ -123,7 +156,7 @@ function ClienteCadastro(props){
 
                 <div className="row">
                     {carregando > 0 ? <div class="spinner-border text-danger mx-auto" role="status"><span class="sr-only">Loading ...</span></div>
-                    :<button onClick={cadastrar} type="button" className="btn btn-lg btn-block text-center mx-auto mt-3 mb-5 btn-cadastro">{props.match.params.id ? 'Atualizar' : 'Gravar'}</button>
+                    :<button onClick={props.match.params.id ? atualizar : cadastrar} type="button" className="btn btn-lg btn-block text-center mx-auto mt-3 mb-5 btn-cadastro">{props.match.params.id ? 'Atualizar' : 'Gravar'}</button>
                     }
                 </div>
 

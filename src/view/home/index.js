@@ -33,7 +33,7 @@ function Home({match}){
     }else{
         firebase.firestore().collection('clientes').get().then(async (resultado) => {
             await resultado.docs.forEach(doc => {
-               if(doc.data().nome.indexOf(pesquisa) >= 0)
+               if(doc.data().nome && doc.data().nome.indexOf(pesquisa) >= 0)
                {                   
                listaeventos.push({
                    id: doc.id,
