@@ -22,60 +22,49 @@ function ClienteDetalhe(props){
     <>
             <Navbar/>
 
-            <div className="container-fluid">
-                <div className="row">
-	                <img src={urlImg} className="img-banner" alt="Banner" />
-	            </div>
-
-                <div className="row mt-5 d-flex justify-content-around">
-                    <div className="col-md-3 col-sm-12 box-info p-3 my-2">
-                        <h5><strong>Nome</strong></h5>
-                        <span className="mt-3">{evento.nome}</span>
-                    </div>
-                </div>
-                
-                <div className="row mt-5 d-flex justify-content-around">
-                    <div className="col-md-3 col-sm-12 box-info p-3 my-2">
-                        <h5><strong>CPF</strong></h5>
-                        <span className="mt-3">{evento.cpf}</span>
-                    </div>
-                </div>
-                
-                <div className="row mt-5 d-flex justify-content-around">
-                    <div className="col-md-3 col-sm-12 box-info p-3 my-2">
-                        <h5><strong>Idade</strong></h5>
-                        <span className="mt-3">{evento.idade}</span>
-                    </div>
-                </div>
-                
-                <div className="row mt-5 d-flex justify-content-around">
-                    <div className="col-md-3 col-sm-12 box-info p-3 my-2">
-                        <h5><strong>Estado Civil</strong></h5>
-                        <span className="mt-3">{evento.estadocivil}</span>
-                    </div>
-                </div>
-                
-                <div className="row mt-5 d-flex justify-content-around">
-                    <div className="col-md-3 col-sm-12 box-info p-3 my-2">
-                        <h5><strong>Cidade</strong></h5>
-                        <span className="mt-3">{evento.cidade}</span>
-                    </div>
-                </div>
+            <div className="container">
             
-                <div className="row mt-5 d-flex justify-content-around">
-                    <div className="col-md-3 col-sm-12 box-info p-3 my-2">
-                        <h5><strong>Estado</strong></h5>
-                        <span className="mt-3">{evento.estado}</span>
-                    </div>
-                </div>
+                <div className="row">
 
-                <div className="row mt-5 d-flex justify-content-around">
-                    <div className="col-md-3 col-sm-12 box-info p-3 my-2">
-                        <h5 className="mx-auto"><strong>Observação</strong></h5>
-                        <p className="text-justify p-3"> {evento.observacao}</p>
+	                    <img src={urlImg} className="img-banner" alt="Banner" />
+
+                                <div className="col-md mt-5 text-white nome">
+                                    <h5><strong>Nome</strong></h5>
+                                    <span className="mt-3">{evento.nome}</span>
+                                </div>
+
+                                <div className="col-md mt-5 text-white cpf">
+                                    <h5><strong>Cpf</strong></h5>
+                                    <span className="mt-3">{evento.cpf}</span>
+                                </div>
+                        
+                                <div className="col-md mt-5 text-white idade">
+                                    <h5><strong>Idade</strong></h5>
+                                    <span className="mt-3">{evento.idade}</span>
+                                </div>
+                            
+                                <div className="col-md mt-5 text-white estadocivil">
+                                    <h5><strong>Estado Civil</strong></h5>
+                                    <span className="mt-3">{evento.estadocivil}</span>
+                                </div>
+
+                                <div className="col-md mt-5 text-white cidade">
+                                    <h5><strong>Cidade</strong></h5>
+                                    <span className="mt-3">{evento.cidade}</span>
+                                </div>
+                        
+                                <div className="col-md mt-5 text-white estado">
+                                    <h5><strong>Estado</strong></h5>
+                                    <span className="mt-3">{evento.estado}</span>
+                                </div>
+                            
+                                <div className="col-md mt-5 text-white observacao">
+                                    <h5><strong>Observação</strong></h5>
+                                    <p className="mt-3"> {evento.observacao}</p>
+
+                                </div>
 
                     </div>
-                </div>
                             <Link to={`/editarcliente/${props.match.params.id}`} className="btn-editar"><i className="fas fa-pen-square fa-3x"></i></Link>
             </div>
 

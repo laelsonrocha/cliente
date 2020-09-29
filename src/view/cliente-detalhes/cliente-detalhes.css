@@ -6,7 +6,7 @@
 
 .box-info{
     background-color: dimgray;
-    color: #fff;
+    color: white;
     display: flex;
     display: flex;
     flex-direction: column;
@@ -25,6 +25,26 @@
     color: dimgray;
 }
 
-.titulo, .visualiacoes{
-    color: dimgray;
+.nome{
+    background-color: dimgray;
+}
+
+.cpf{
+    background-color: dimgray;
+}
+
+.observacao{
+    background-color: dimgray;
+}
+.idade{
+    background-color: dimgray;
+}
+.estadocivil{
+    background-color: dimgray;
+}
+.cidade{
+    background-color: dimgray;
+}
+.estado{
+    background-color: dimgray;
 }
